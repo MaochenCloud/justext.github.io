@@ -14,7 +14,7 @@ COMMIT_EDITMSG  HEAD  ORIG_HEAD  branches  config  description  hooks  index  in
 每个commit都有一个hash值，commit里面包含一个tree，tree中的blob对应着文件.
 ## 分离头指针
 HEAD不再指向分支，而是直接指向某个commit，git可能会将改动删除.
-```
+```shell
 $ git checkout  <commit-hash>
 Note: checking out 'f20a7ad'.
 
@@ -43,22 +43,21 @@ Date:   Thu May 19 13:28:53 2022 +0000
     add 1.c
 ```
      
-
 # Git命令
 ## git的最小配置,配置user.name和user.email
-```
+```shell
 git config --global user.name "Thomas"
 git config --global user.email "Thomas@intel.com "
 git config --global --list
 ```
 ## 创建第一个工作仓库
-```
+```shell
 git init hello-world && cd hello-world
 git config --local user.name "Thomas"
 git config --local user.email "Thomas.intel.com"
 ```
 ## 增删查分支
-```
+```shell
 # 列出所有的分支
 git branch -av
 
@@ -69,7 +68,7 @@ git branch <new-branch>
 git branch -D <branch>
 ```
 ## 切换分支
-```
+```shell
 # 切换分支
 git checkout <branch>
 
@@ -77,7 +76,7 @@ git checkout <branch>
 git checkout -b <branch> origin remote/<branch>
 ```
 ## 添加修改到暂存
-```
+```shell
 # 把指定文件添加到暂存区
 git add 001.c
 
@@ -85,7 +84,7 @@ git add 001.c
 git add .
 ```
 ## 提交修改到本地仓库
-```
+```shell
 # 提交本地的所有修改
 git commit -a
 
@@ -93,11 +92,11 @@ git commit -a
 git commit -m 'commit message'
 ```
 ## 显示工作路径下已修改的文件
-```
+```shell
 git status
 ```
 ## 文件重命名
-```
+```shell
 mv readme readme.md
 git add readme.md
 git rm readme
@@ -107,11 +106,11 @@ git mv readme  readme.md
 git commit -am "mv readme to readme.md"
 ```
 ## 文件删除
-```
+```shell
 git rm 001.c
 ```
 ## 查看git版本历史
-```
+```shell
 # 近期4条commit
 git log -n4
 
@@ -120,7 +119,7 @@ git log --all --graph
 ```
 ## 存储
 有时，需要在同一个项目的不同分支上工作。当需要切换分支时，偏偏本地的工作还没有完成，此时，提交修改显得不严谨，但是不提交代码又无法切换分支。这时，可以使用 git stash 将本地的修改内容作为草稿储藏起来.
-```
+```shell
 # 将修改作为当前分支的草稿保存
 git stash
 
@@ -131,7 +130,7 @@ git stash list
 $ git stash pop
 ```
 ## 版本比较
-```
+```shell
 # HEAD与上级commit比较、HEAD与上上级commit比较
 git diff HEAD HEAD~1
 git diff HEAD HEAD~2
@@ -148,12 +147,12 @@ git diff --cached
 # 工作区和版本区比较
 git diff HEAD
 ```
-# 从当前目录的所有文件中查找文本内容
-```
+## 从当前目录的所有文件中查找文本内容
+```shell
 git grep "Hello"
 ```
 ## 撤销修改
-```
+```shell
 # 暂存区和版本区保持一致,清空暂存区
 git reset HEAD
 
@@ -176,12 +175,12 @@ $ git checkout HEAD <file>
 git checkout <file>
 ```
 ## 删除远端指定版本
-```
+```shell
 git reset --hard <commit-hash>
 git push -f
 ```
 ## 从远端更新本地
-```
+```shell
 # 下载远程端版本，但不合并到HEAD中
 git fetch <remote>
 
@@ -189,7 +188,7 @@ git fetch <remote>
 git pull origin master
 ```
 ## 从本地推送远端
-```
+```shell
 # 将本地版本推送到远程端
 git push -u origin <branch> 
 
