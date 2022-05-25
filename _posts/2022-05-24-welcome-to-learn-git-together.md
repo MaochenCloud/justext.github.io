@@ -4,7 +4,7 @@
 - **暂存区（staging）**: 暂存区是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。有时候也被称作 `‘索引’'，不过一般说法还是叫暂存区。
 - **本地仓库（local）**: 提交更新，找到暂存区域的文件，将快照永久性存储到 Git 本地仓库。
 - **远程仓库（remote）**: 以上几个工作区都是在本地。为了让别人可以看到你的修改，需要将更新推送到远程仓库。  
-![git-workflow](https://github.com/MaochenCloud/justext.github.io/blob/master/assets/git-learn/gitworkflow.png)  
+![git-workflow]({{"/assets/git-learn/gitworkflow.png" | absolute_url }})  
 ## .git目录
 *COMMIT_EDITMSG*  **HEAD**  *ORIG_HEAD*   **config**  *description* ... *logs*  *objects*  **refs**
 - HEAD: refs/heads/master, 当前的分支在master.
