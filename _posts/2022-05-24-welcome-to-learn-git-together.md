@@ -1,6 +1,9 @@
 # Git基本概念
 ## 项目在git中的不同工作区
-  ![git-workflow]({{"/assets/git-learn/gitworkflow.png" | absolute_url }})   
+
+  ![git-workflow]({{"/assets/git-learn/gitworkflow.png" | absolute_url }}) 
+  <!--more-->
+
 - **工作区（working）**: 当 git clone 一个项目到本地，相当于在本地克隆了项目的一个副本。工作区是对项目的某个版本独立提取出来的内容。这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供使用或修改。
 - **暂存区（staging）**: 暂存区是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。有时候也被称作 `‘索引’'，不过一般说法还是叫暂存区。
 - **本地仓库（local）**: 提交更新，找到暂存区域的文件，将快照永久性存储到 Git 本地仓库。
