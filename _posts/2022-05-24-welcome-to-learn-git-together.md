@@ -1,19 +1,19 @@
 # Git基本概念
 ## 项目在git中的不同工作区
+![git-workflow]({{"/assets/git-learn/gitworkflow.png" | absolute_url }})  
 - **工作区（working）**: 当 git clone 一个项目到本地，相当于在本地克隆了项目的一个副本。工作区是对项目的某个版本独立提取出来的内容。这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供使用或修改。
 - **暂存区（staging）**: 暂存区是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。有时候也被称作 `‘索引’'，不过一般说法还是叫暂存区。
 - **本地仓库（local）**: 提交更新，找到暂存区域的文件，将快照永久性存储到 Git 本地仓库。
 - **远程仓库（remote）**: 以上几个工作区都是在本地。为了让别人可以看到你的修改，需要将更新推送到远程仓库。  
-
 ## .git目录
 *COMMIT_EDITMSG*  **HEAD**  *ORIG_HEAD*   **config**  *description* ... *logs*  *objects*  **refs**
-- HEAD: refs/heads/master, 当前的分支在master.
-- config: core和user配置信息.  
-- refs: 目录里面存放branch信息和commit指针。
+- **HEAD**: refs/heads/master, 当前的分支在master.
+- **config**: core和user配置信息.  
+- **refs**: 目录里面存放branch信息和commit指针。    
 ## commit、tree、blob三者对象的关系
 每个commit都有一个hash值，commit里面包含一个tree，tree中的blob对应着文件.
 ## 分离头指针
-HEAD不再指向分支，而是直接指向某个commit，git可能会将改动删除.
+HEAD不再指向分支，而是直接指向某个commit，git可能会将改动删除.  
 ```shell
 $ git checkout  <commit-hash>
 Note: checking out 'f20a7ad'.
