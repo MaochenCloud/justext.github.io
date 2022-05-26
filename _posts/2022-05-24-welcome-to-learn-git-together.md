@@ -1,20 +1,20 @@
-# Git基本概念
-## 项目在git中的不同工作区
+## Git基本概念
+### 项目在git中的不同工作区
   ![git-workflow]({{"/assets/git-learn/gitworkflow.png" | absolute_url }})   
 * **工作区（working）**: 当 git clone 一个项目到本地，相当于在本地克隆了项目的一个副本。工作区是对项目的某个版本独立提取出来的内容。这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供使用或修改。
 * **暂存区（staging）**: 暂存区是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。有时候也被称作 `‘索引’'，不过一般说法还是叫暂存区。
 * **本地仓库（local）**: 提交更新，找到暂存区域的文件，将快照永久性存储到 Git 本地仓库。
 * **远程仓库（remote）**: 以上几个工作区都是在本地。为了让别人可以看到你的修改，需要将更新推送到远程仓库.
 
-## .git目录
+### .git目录
 *COMMIT_EDITMSG*  **HEAD**  *ORIG_HEAD*   **config**  *description* ... *logs*  *objects*  **refs**
 * **HEAD**: refs/heads/master, 当前的分支在master.
 * **config**: core和user配置信息.  
 * **refs**: 目录里面存放branch信息和commit指针.
 
-## commit、tree、blob三者对象的关系
+### commit、tree、blob三者对象的关系
 每个commit都有一个hash值，commit里面包含一个tree，tree中的blob对应着文件.
-## 分离头指针
+### 分离头指针
 HEAD不再指向分支，而是直接指向某个commit，git可能会将改动删除.  
 ```shell
 $ git checkout  <commit-hash>
@@ -45,20 +45,20 @@ Date:   Thu May 19 13:28:53 2022 +0000
     add 1.c
 ```
      
-# Git命令
-## git的最小配置,配置user.name和user.email
+## Git命令
+### git的最小配置,配置user.name和user.email
 ```shell
 git config --global user.name "Thomas"
 git config --global user.email "Thomas@intel.com "
 git config --global --list
 ```
-## 创建第一个工作仓库
+### 创建第一个工作仓库
 ```shell
 git init hello-world && cd hello-world
 git config --local user.name "Thomas"
 git config --local user.email "Thomas.intel.com"
 ```
-## 增删查分支
+### 增删查分支
 ```shell
 # 列出所有的分支
 git branch -av
@@ -69,7 +69,7 @@ git branch <new-branch>
 # 强制删除本地分支，将会丢失未合并的修改
 git branch -D <branch>
 ```
-## 切换分支
+### 切换分支
 ```shell
 # 切换分支
 git checkout <branch>
@@ -77,7 +77,7 @@ git checkout <branch>
 # 创建并切换到新分支,本地branch与远端branch保持一致
 git checkout -b <branch> origin remote/<branch>
 ```
-## 添加修改到暂存
+### 添加修改到暂存
 ```shell
 # 把指定文件添加到暂存区
 git add <file>
@@ -85,7 +85,7 @@ git add <file>
 # 把当前所有修改添加到暂存区
 git add .
 ```
-## 提交修改到本地仓库
+### 提交修改到本地仓库
 ```shell
 # 提交本地的所有修改
 git commit -a
@@ -93,11 +93,11 @@ git commit -a
 # 附加消息提交
 git commit -m 'commit message'
 ```
-## 显示工作路径下已修改的文件
+### 显示工作路径下已修改的文件
 ```shell
 git status
 ```
-## 文件重命名
+### 文件重命名
 ```shell
 mv readme readme.md
 git add readme.md
@@ -107,11 +107,11 @@ git commit -m "mv readme to readme.md"
 git mv readme  readme.md
 git commit -am "mv readme to readme.md"
 ```
-## 文件删除
+### 文件删除
 ```shell
 git rm <file>
 ```
-## 查看git版本历史
+### 查看git版本历史
 ```shell
 # 近期4条commit
 git log -n4
@@ -119,7 +119,7 @@ git log -n4
 # 所有branch图形化显示
 git log --all --graph 
 ```
-## 存储
+### 存储
 有时，需要在同一个项目的不同分支上工作。当需要切换分支时，偏偏本地的工作还没有完成，此时，提交修改显得不严谨，但是不提交代码又无法切换分支。这时，可以使用 git stash 将本地的修改内容作为草稿储藏起来.
 ```shell
 # 将修改作为当前分支的草稿保存
@@ -131,7 +131,7 @@ git stash list
 # 读取存储，弹出栈区，不保留堆栈，且每个分支共享一个堆栈
 $ git stash pop
 ```
-## 版本比较
+### 版本比较
 ```shell
 # HEAD与上级commit比较、HEAD与上上级commit比较
 git diff HEAD HEAD~1
@@ -149,11 +149,11 @@ git diff --cached
 # 工作区和版本区比较
 git diff HEAD
 ```
-## 从当前目录的所有文件中查找文本内容
+### 从当前目录的所有文件中查找文本内容
 ```shell
 git grep "Hello"
 ```
-## 撤销修改
+### 撤销修改
 ```shell
 # 暂存区和版本区保持一致,清空暂存区
 git reset HEAD
@@ -168,20 +168,20 @@ git reset --hard <commit-hash>
 git reset --hard HEAD
 
 # 用远端分支强制覆盖本地分支
-$ git reset --hard <remote/branch>
+git reset --hard <remote/branch>
 
 # 放弃某个文件的所有本地修改
-$ git checkout HEAD <file>
+git checkout HEAD <file>
 
 # 工作区恢复到暂存区
 git checkout <file>
 ```
-## 删除远端指定版本
+### 删除远端指定版本
 ```shell
 git reset --hard <commit-hash>
 git push -f
 ```
-## 从远端更新本地
+### 从远端更新本地
 ```shell
 # 下载远程端版本，但不合并到HEAD中
 git fetch <remote>
@@ -189,7 +189,7 @@ git fetch <remote>
 # 将远程端版本合并到本地版本中
 git pull origin master
 ```
-## 从本地推送远端
+### 从本地推送远端
 ```shell
 # 将本地版本推送到远程端
 git push -u origin <branch> 
@@ -198,4 +198,57 @@ git push -u origin <branch>
 git push origin --delete <branch>
 ```
 
-# Git常见的场景
+## Git常见的场景
+### 修改commit的message
+1. 修改最新的commit的message
+```shell
+git commit --amend
+```
+2. 修改过去的commit的message 例: 修改HEAD~1的commit message.
+```shell
+########################################################################
+Target: 修改HEAD~1的commit message.
+Historical commit: 
+  commit b72a38cbe417766d4e4e793e9d2b72a64b6a8982 (HEAD -> testMchen)
+    feat: Add 3.c
+  commit de24974c93074f06231174eb5c0afd076416d743
+    move readme to readme.md
+  commit f20a7ad7f08a2732bb6a53eb4af96bc159d4e132
+    add readme file
+########################################################################
+
+# 修改HEAD~1的message,需要进入HEAD~2的进行修改，不直接修改HEAD~1, hash值会改变.
+$ git rebase -i f20a7ad7 
+# 选择 r, reword = use commit, but edit the commit message
+# pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
+```
+3. 合并连续的commit
+```shell
+########################################################################
+Target: 合并HEAD~1,HAED~2的commit message.
+Historical commit:
+  commit cc37e3adc075a42f1bb83b693436998131ee37a9 (HEAD -> testMchen)
+    feat: add 3.c  
+  commit b727c6db949da0c97f47b264e70cab7435d1d88f
+    feat: move readme to readme.md
+  commit 66410b885cc6cb8f1f3a37c8ffc8c7b4d5339e82
+    feat: add readme file
+  commit 7e49d01d1f0817b1363ae5d83fcc5d5856d78341
+    feat: add 1.c
+########################################################################
+
+$ git rebase  -i 7e49d01d
+# 选择 s, squash = use commit, gbut meld into previous commit
+```
+
+
+
+
+
+
+
+
+
+
+
+
