@@ -199,7 +199,6 @@ git push origin --delete <branch>
 ```
 
 ## Git常见的场景
-### 修改commit的message
 ### 修改最新的commit的message
 ```shell
 git commit --amend
@@ -325,7 +324,7 @@ $ git commit -s -m"resloved conflict by hand with 5"
 $ git push -u origin add_readme
 ~~~
 
-## 更名文件且他人修改文件
+### 更名文件且他人修改文件
 ~~~
 ======================================================================
 Background: A已经提交readme.md的变更readme，B没有A的最新commit.
@@ -342,6 +341,31 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 $ git pull origin
 $ git push  -u origin  add_readme
 ~~~
+
+### 慎用git push -f origin
+~~~
+======================================================================
+Experiment:
+$ git reset --hard e244c088
+$ git commit -s -m "delete some commit"
+$ git push origin  -u add_readme
+To https://github.com/MaochenCloud/git_learning.git
+ ! [rejected]        add_readme -> add_readme (non-fast-forward)
+error: failed to push some refs to 'https://github.com/MaochenCloud/git_learning.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+$ git push -f origin -u add_readme
+======================================================================
+
+# git push -f  origin 会把之前的commit全部删除
+~~~
+
+### 集成分支上不做rebase
+> 会导致分支上的hash值改变，其他人的commit的是老的hash值,无法跟新.
+> 如要修改以前的commits信息,可以提交新的commit，而不是rebase变基,当然自己创建的维护的分支可以变基.
+
 
 
 
