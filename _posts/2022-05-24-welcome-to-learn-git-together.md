@@ -205,7 +205,7 @@ git push origin --delete <branch>
 git commit --amend
 ```
 
-### 修改过去的commit的message 例: 修改HEAD~1的commit message.
+### 修改过去的commit的message
 
 ~~~
 ======================================================================
@@ -222,7 +222,7 @@ Historical commit:
 # 修改HEAD~1的message,需要进入HEAD~2的进行修改，不直接修改HEAD~1, hash值会改变.
 $ git rebase -i f20a7ad7 
 # 选择 r, reword = use commit, but edit the commit message
-> pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
+# pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
 ~~~
 
 ### 合并连续的commit
@@ -245,18 +245,18 @@ $ git rebase  -i 7e49d01d
 # 选择 s, squash = use commit, gbut meld into previous commit
 ~~~
 
-### 将本地的版本项目上传github
+### 本地项目上传github
 
 ~~~
 # 生成公私钥
 $ ssh-keygen -t rsa -C "mao.chen@intel.com" 
-> copy the id_key.pub to the github settings 
-> New repository -> add owner,repository name, public -> create repository 
+# copy the id_key.pub to the github settings 
+# New repository -> add owner,repository name, public -> create repository 
 $ git remote add origin https://github.com/MaochenCloud/git_learning.git 
 $ git push -u origin main
 ~~~
 
-### 不同的人维护同一个分支，但是不同文件
+### 多人维护相同分支的不同文件
 ```shell
 $ git pull origin
 # git checkout -b (本地名(一般与线上分枝名一致)) origin／线上分支名
@@ -266,7 +266,7 @@ $ git commit -s -m "commit_message"
 $ git push -u origin <branch>
 ```
 
-### 不同的人维护同一个文件的不同的区域。
+### 多人维护相同文件的不同区域
 
 ~~~
 ======================================================================
@@ -288,7 +288,7 @@ $ git pull origin
 $ git push  -u origin  add_readme
 ~~~
 
-### 不同的人维护同一个文件的同一个的区域。
+### 多人维护相同文件的相同区域
 
 ~~~
 ======================================================================
@@ -325,7 +325,23 @@ $ git commit -s -m"resloved conflict by hand with 5"
 $ git push -u origin add_readme
 ~~~
 
-
+## 更名文件且他人修改文件
+~~~
+======================================================================
+Background: A已经提交readme.md的变更readme，B没有A的最新commit.
+$ git push  -u origin  add_readme
+To https://github.com/MaochenCloud/git_learning.git
+ ! [rejected]        add_readme -> add_readme (fetch first)
+error: failed to push some refs to 'https://github.com/MaochenCloud/git_learning.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+======================================================================
+$ git pull origin
+$ git push  -u origin  add_readme
+~~~
 
 
 
