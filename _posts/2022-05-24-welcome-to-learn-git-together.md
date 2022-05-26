@@ -93,6 +93,14 @@ git commit -a
 # 附加消息提交
 git commit -m 'commit message'
 ```
+### 打包应用
+```shell
+# 打包HEAD的第一个commit,生成0001-commit_message>.patch
+git format-patch -1 / git format-patch HEAD~1
+
+# 打包HEAD的第一个第二个commit,生成0001-commit_message>.patch, 0002-commit_message>.patch
+git format-patch -2 / git format-patch HEAD~2
+```
 ### 显示工作路径下已修改的文件
 ```shell
 git status
@@ -325,6 +333,7 @@ $ git push -u origin add_readme
 ~~~
 
 ### 更名文件且他人修改文件
+
 ~~~
 ======================================================================
 Background: A已经提交readme.md的变更readme，B没有A的最新commit.
@@ -343,6 +352,7 @@ $ git push  -u origin  add_readme
 ~~~
 
 ### 多人协作时多分支集成
+
 ~~~
 ======================================================================
 Target: 向别人分支branch_a上，提交自己分支branch_b
@@ -355,6 +365,26 @@ $ git rebase branch_a
 $ git add <file>
 $ git rebase --continue
 $ git push -u origin -f branch_b 
+~~~
+
+### 打包commit并且apply
+
+~~~
+======================================================================
+Target: 将当前的patch，应用到HEAD~2版本之上
+Background: 
+  commit cac9c8349b43e85537a770c4693e0fd3191e422c (HEAD -> testMchen)
+    rm 6~10.c
+  commit a921d81a9806a29f54e6b323e2c8be83b1677571
+    add 10.c
+  commit c7f11a34056962e1f5bd83a70ec9a77dd4e956ba
+    add 7.c
+  commit 7593b17ea2069a93911777dd75851de16ac0ae17
+    add 5.c
+======================================================================
+
+$git format-patch HEAD~2
+$git am 0002-<commit_message>.patch
 ~~~
 
 ### 慎用git push -f origin
