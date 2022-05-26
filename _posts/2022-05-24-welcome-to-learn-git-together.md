@@ -46,7 +46,7 @@ Date:   Thu May 19 13:28:53 2022 +0000
 ```
      
 ## Git命令
-### git的最小配置,配置user.name和user.email
+### git的最小配置
 ```shell
 git config --global user.name "Thomas"
 git config --global user.email "Thomas@intel.com "
@@ -340,6 +340,21 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ======================================================================
 $ git pull origin
 $ git push  -u origin  add_readme
+~~~
+
+### 多人协作时多分支集成
+~~~
+======================================================================
+Target: 向别人分支branch_a上，提交自己分支branch_b
+======================================================================
+$ git checkout branch_a
+$ git pull 
+$ git checkout -b branch_b origin branch_b 
+$ git rebase branch_a
+# 如有conflict就fix
+$ git add <file>
+$ git rebase --continue
+$ git push -u origin -f branch_b 
 ~~~
 
 ### 慎用git push -f origin
