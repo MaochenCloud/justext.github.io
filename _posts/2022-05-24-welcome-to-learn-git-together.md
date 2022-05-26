@@ -205,7 +205,7 @@ git push origin --delete <branch>
 git commit --amend
 ```
 2. 修改过去的commit的message 例: 修改HEAD~1的commit message.
-```shell
+~~~
 ===============================================================================
 Target: 修改HEAD~1的commit message.
 Historical commit: 
@@ -220,10 +220,11 @@ Historical commit:
 # 修改HEAD~1的message,需要进入HEAD~2的进行修改，不直接修改HEAD~1, hash值会改变.
 $ git rebase -i f20a7ad7 
 # 选择 r, reword = use commit, but edit the commit message
-# pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
-```
+> pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
+~~~
+
 3. 合并连续的commit
-```shell
+~~~
 ===============================================================================
 Target: 合并HEAD~1,HAED~2的commit message.
 Historical commit:
@@ -239,10 +240,25 @@ Historical commit:
 
 $ git rebase  -i 7e49d01d
 # 选择 s, squash = use commit, gbut meld into previous commit
+~~~
+4. 将本地的版本项目上传github
+~~~
+# 生成公私钥
+$ ssh-keygen -t rsa -C "mao.chen@intel.com" 
+> copy the id_key.pub to the github settings 
+> New repository -> add owner,repository name, public -> create repository 
+$ git remote add origin https://github.com/MaochenCloud/git_learning.git 
+$ git push -u origin main
+~~~
+5. 不同的人维护同一个分支，但是不同文件
+```shell
+$ git pull origin
+# git checkout -b (本地名(一般与线上分枝名一致)) origin／线上分支名
+$ git checkout  -b <branch> origin/<branch> 
+$ git add <file>
+$ git commit -s -m "commit_message"
+$ git push -u origin <branch>
 ```
-
-
-
 
 
 
