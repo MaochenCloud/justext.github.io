@@ -383,8 +383,10 @@ Background:
     add 5.c
 ======================================================================
 
-$git format-patch HEAD~2
-$git am 0002-<commit_message>.patch
+# 将最近的两次commit打包，生成两个patch文件 0001-add-10.c.patch  0002-rm-6-10.c.patch  
+$ git format-patch HEAD~2
+$ git reset --hard HEAD~2
+$ git am 0002-rm-6-10.c.patch
 ~~~
 
 ### 慎用git push -f origin
