@@ -12,7 +12,7 @@
 * **config**: core和user配置信息.  
 * **refs**: 目录里面存放branch信息和commit指针.
 
-### commit、tree、blob三者对象的关系
+### commit、tree、blob
 每个commit都有一个hash值，commit里面包含一个tree，tree中的blob对应着文件.
 ### 分离头指针
 HEAD不再指向分支，而是直接指向某个commit，git可能会将改动删除.  
@@ -157,7 +157,7 @@ git diff --cached
 # 工作区和版本区比较
 git diff HEAD
 ```
-### 从当前目录的所有文件中查找文本内容
+### 当前目录中查找文本内容
 ```shell
 git grep "Hello"
 ```
@@ -205,15 +205,12 @@ git push -u origin <branch>
 # 删除远程端分支
 git push origin --delete <branch>
 ```
-
 ## Git常见的场景
 ### 修改最新的commit的message
 ```shell
 git commit --amend
 ```
-
 ### 修改过去的commit的message
-
 ~~~
 ======================================================================
 Target: 修改HEAD~1的commit message.
@@ -231,9 +228,7 @@ $ git rebase -i f20a7ad7
 # 选择 r, reword = use commit, but edit the commit message
 # pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
 ~~~
-
 ### 合并连续的commit
-
 ~~~
 ======================================================================
 Target: 合并HEAD~1,HAED~2的commit message.
@@ -253,7 +248,6 @@ $ git rebase  -i 7e49d01d
 ~~~
 
 ### 本地项目上传github
-
 ~~~
 # 生成公私钥
 $ ssh-keygen -t rsa -C "mao.chen@intel.com" 
@@ -262,7 +256,6 @@ $ ssh-keygen -t rsa -C "mao.chen@intel.com"
 $ git remote add origin https://github.com/MaochenCloud/git_learning.git 
 $ git push -u origin main
 ~~~
-
 ### 多人维护相同分支的不同文件
 ```shell
 $ git pull origin
@@ -272,9 +265,7 @@ $ git add <file>
 $ git commit -s -m "commit_message"
 $ git push -u origin <branch>
 ```
-
 ### 多人维护相同文件的不同区域
-
 ~~~
 ======================================================================
 Target: A,B共同维护readme
@@ -294,9 +285,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 $ git pull origin
 $ git push  -u origin  add_readme
 ~~~
-
 ### 多人维护相同文件的相同区域
-
 ~~~
 ======================================================================
 Target: A,B共同维护readme
@@ -331,9 +320,7 @@ $ git add readme.md
 $ git commit -s -m"resloved conflict by hand with 5"
 $ git push -u origin add_readme
 ~~~
-
 ### 更名文件且他人修改文件
-
 ~~~
 ======================================================================
 Background: A已经提交readme.md的变更readme，B没有A的最新commit.
@@ -350,9 +337,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 $ git pull origin
 $ git push  -u origin  add_readme
 ~~~
-
 ### 多人协作时多分支集成
-
 ~~~
 ======================================================================
 Target: 向别人分支branch_a上，提交自己分支branch_b
@@ -366,9 +351,7 @@ $ git add <file>
 $ git rebase --continue
 $ git push -u origin -f branch_b 
 ~~~
-
 ### 打包commit并且apply
-
 ~~~
 ======================================================================
 Target: 将当前的patch，应用到HEAD~2版本之上
@@ -388,7 +371,6 @@ $ git format-patch HEAD~2
 $ git reset --hard HEAD~2
 $ git am 0002-rm-6-10.c.patch
 ~~~
-
 ### 慎用git push -f origin
 ~~~
 ======================================================================
@@ -408,7 +390,6 @@ $ git push -f origin -u add_readme
 
 # git push -f  origin 会把之前的commit全部删除
 ~~~
-
 ### 集成分支上不做rebase
 > 会导致分支上的hash值改变，其他人的commit的是老的hash值,无法跟新.
 > 如要修改以前的commits信息,可以提交新的commit，而不是rebase变基,当然自己创建的维护的分支可以变基.
