@@ -206,7 +206,7 @@ git commit --amend
 ```
 2. 修改过去的commit的message 例: 修改HEAD~1的commit message.
 ```shell
-########################################################################
+===============================================================================
 Target: 修改HEAD~1的commit message.
 Historical commit: 
   commit b72a38cbe417766d4e4e793e9d2b72a64b6a8982 (HEAD -> testMchen)
@@ -215,7 +215,7 @@ Historical commit:
     move readme to readme.md
   commit f20a7ad7f08a2732bb6a53eb4af96bc159d4e132
     add readme file
-########################################################################
+===============================================================================
 
 # 修改HEAD~1的message,需要进入HEAD~2的进行修改，不直接修改HEAD~1, hash值会改变.
 $ git rebase -i f20a7ad7 
@@ -224,7 +224,7 @@ $ git rebase -i f20a7ad7
 ```
 3. 合并连续的commit
 ```shell
-########################################################################
+===============================================================================
 Target: 合并HEAD~1,HAED~2的commit message.
 Historical commit:
   commit cc37e3adc075a42f1bb83b693436998131ee37a9 (HEAD -> testMchen)
@@ -235,7 +235,7 @@ Historical commit:
     feat: add readme file
   commit 7e49d01d1f0817b1363ae5d83fcc5d5856d78341
     feat: add 1.c
-########################################################################
+===============================================================================
 
 $ git rebase  -i 7e49d01d
 # 选择 s, squash = use commit, gbut meld into previous commit
