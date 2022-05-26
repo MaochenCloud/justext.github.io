@@ -200,12 +200,12 @@ git push origin --delete <branch>
 
 ## Git常见的场景
 ### 修改commit的message
-1. 修改最新的commit的message
+### 修改最新的commit的message
 ```shell
 git commit --amend
 ```
 
-2. 修改过去的commit的message 例: 修改HEAD~1的commit message.
+### 修改过去的commit的message 例: 修改HEAD~1的commit message.
 
 ~~~
 ======================================================================
@@ -225,7 +225,7 @@ $ git rebase -i f20a7ad7
 > pick 1614c10 move readme to readme.md --> r 1614c10 move readme to readme.md
 ~~~
 
-3. 合并连续的commit
+### 合并连续的commit
 
 ~~~
 ======================================================================
@@ -245,7 +245,7 @@ $ git rebase  -i 7e49d01d
 # 选择 s, squash = use commit, gbut meld into previous commit
 ~~~
 
-4. 将本地的版本项目上传github
+### 将本地的版本项目上传github
 
 ~~~
 # 生成公私钥
@@ -255,7 +255,8 @@ $ ssh-keygen -t rsa -C "mao.chen@intel.com"
 $ git remote add origin https://github.com/MaochenCloud/git_learning.git 
 $ git push -u origin main
 ~~~
-5. 不同的人维护同一个分支，但是不同文件
+
+### 不同的人维护同一个分支，但是不同文件
 ```shell
 $ git pull origin
 # git checkout -b (本地名(一般与线上分枝名一致)) origin／线上分支名
@@ -265,14 +266,14 @@ $ git commit -s -m "commit_message"
 $ git push -u origin <branch>
 ```
 
-6. 不同的人维护同一个文件的不同的区域。
+### 不同的人维护同一个文件的不同的区域。
 
 ~~~
 ======================================================================
 Target: A,B共同维护readme
 Background: A完成提交,B在没有A的最新提交commit，实施提交自己的commit
 Errors: 
-git push  -u origin  add_readme
+$ git push  -u origin  add_readme
 To https://github.com/MaochenCloud/git_learning.git
  ! [rejected]        add_readme -> add_readme (fetch first)
 error: failed to push some refs to 'https://github.com/MaochenCloud/git_learning.git'
@@ -287,6 +288,42 @@ $ git pull origin
 $ git push  -u origin  add_readme
 ~~~
 
+### 不同的人维护同一个文件的同一个的区域。
+
+~~~
+======================================================================
+Target: A,B共同维护readme
+Background: A完成提交,B在没有A的最新提交commit，实施提交自己的commit
+Errors-0: 
+$ git push -u origin  add_readme
+To https://github.com/MaochenCloud/git_learning.git
+ ! [rejected]        add_readme -> add_readme (non-fast-forward)
+error: failed to push some refs to 'https://github.com/MaochenCloud/git_learning.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+Errors-1:
+$ git pull origin
+Auto-merging readme.md
+CONFLICT (content): Merge conflict in readme.md
+Automatic merge failed; fix conflicts and then commit the result.
+
+5
+<<<<<<< HEAD
+b 5.bkp
+=======
+A 5.bkp
+>>>>>>> 0a14bc7b3860827f49ff0d278230f9de4d65c701
+6
+======================================================================
+
+$ git pull origin
+# B的readme.md有冲突,解决冲突，保留或者合并
+$ git add readme.md
+$ git commit -s -m"resloved conflict by hand with 5"
+$ git push -u origin add_readme
+~~~
 
 
 
