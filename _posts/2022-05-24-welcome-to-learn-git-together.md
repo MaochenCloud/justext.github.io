@@ -348,6 +348,7 @@ $ git checkout -b branch_b origin branch_b
 $ git rebase branch_a
 # 如有conflict就fix
 $ git add <file>
+# git rebase --abort是舍弃之前改动回到最初的状态，git rebase --continue会一条条过conflict,只要git add保留状态
 $ git rebase --continue
 $ git push -u origin -f branch_b 
 ~~~
